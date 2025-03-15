@@ -1,6 +1,6 @@
 # Database Stack Setup Guide
 
-This guide will help you set up and run a database stack that includes PostgreSQL and Redis using Docker Compose.
+This guide will help you set up and run a combined database stack that includes PostgreSQL and Redis using a single Docker image.
 
 ## Prerequisites
 
@@ -27,9 +27,9 @@ This guide will help you set up and run a database stack that includes PostgreSQ
        - `REDIS_PASSWORD`: Redis password
 
 3. **Starting the Services**
-   Run the following command to start the combined data stack with both PostgreSQL and Redis:
+   Run the following command to build and start the combined data stack with both PostgreSQL and Redis:
    ```bash
-   docker-compose -f docker-compose.db.yml up -d
+   docker-compose -f docker-compose.db.yml up -d --build
    ```
 
 4. **Verify Services**
