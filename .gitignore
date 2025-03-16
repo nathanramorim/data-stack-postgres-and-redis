@@ -9,3 +9,4 @@
 *.pyo
 *.pyd
 .DS_Store
+backup_file.sql

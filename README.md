@@ -26,13 +26,19 @@ This guide will help you set up and run a combined database stack that includes 
      - Redis Configuration:
        - `REDIS_PASSWORD`: Redis password
 
-3. **Starting the Services**
+3. **Create Docker Network**
+   Create an external Docker network that will be used by the database stack:
+   ```bash
+   docker network create db-network
+   ```
+
+4. **Starting the Services**
    Run the following command to build and start the combined data stack with both PostgreSQL and Redis:
    ```bash
    docker-compose -f docker-compose.db.yml up -d --build
    ```
 
-4. **Verify Services**
+5. **Verify Services**
    Check if the services are running:
    ```bash
    docker-compose -f docker-compose.db.yml ps

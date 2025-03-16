@@ -3,12 +3,14 @@ name: data-stack
 networks:
   db-network:
     driver: bridge
+    external: true
 
 volumes:
   data-bd:
 
 services:
   data-stack:
+    container_name: data-stack-db
     build:
       context: .
       dockerfile: Dockerfile
@@ -21,6 +23,7 @@ services:
       REDIS_PASSWORD: ${REDIS_PASSWORD}
     volumes:
       - data-bd:/var/lib/postgresql/data
+      - ./backup:/backup
     restart: unless-stopped
     ports:
       - "5433:5432"
