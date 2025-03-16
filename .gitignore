@@ -4,11 +4,9 @@
 *.pem
 *.crt
 *.secret
-backup-postgres/
-config/dump/backup.sh
-config/dump/restore-backup.sh
 **/__pycache__/
 *.pyc
 *.pyo
 *.pyd
 .DS_Store
+backup_file.sql
