@@ -1,32 +1,47 @@
 name: data-stack
 
 networks:
-  db-network:
+  app-network:
     driver: bridge
     external: true
 
 volumes:
   data-bd:
+  redis-data:
 
 services:
-  data-stack:
-    container_name: data-stack-db
+  postgres:
+    container_name: data-stack-postgres
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: postgres.Dockerfile
     platform: linux/arm64
     environment:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       PGDATA: ${PGDATA}
-      REDIS_PASSWORD: ${REDIS_PASSWORD}
     volumes:
       - data-bd:/var/lib/postgresql/data
       - ./backup:/backup
     restart: unless-stopped
     ports:
       - "5433:5432"
-      - "6379:6379"
     networks:
-      - db-network
+      - app-network
+
+  redis:
+    container_name: data-stack-redis
+    build:
+      context: .
+      dockerfile: redis.Dockerfile
+    platform: linux/arm64
+    environment:
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - app-network
+    restart: unless-stopped

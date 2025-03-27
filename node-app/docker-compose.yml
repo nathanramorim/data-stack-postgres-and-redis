@@ -1,7 +1,7 @@
 version: '3.8'
 
 networks:
-  db-network:
+  app-network:
     external: true
 
 services:
@@ -16,4 +16,4 @@ services:
     ports:
       - "3000:3000"
     networks:
-      - db-network
+      - app-network

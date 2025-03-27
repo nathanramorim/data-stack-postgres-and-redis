@@ -4,8 +4,10 @@ set -e
 # Initialize PostgreSQL if not already done
 if [ ! -s "$PGDATA/PG_VERSION" ]; then
     echo "Initializing PostgreSQL database..."
-    mkdir -p "$PGDATA"
-    chmod 700 "$PGDATA"
+    if [ ! -d "$PGDATA" ]; then
+        mkdir -p "$PGDATA"
+        chmod 700 "$PGDATA"
+    fi
     initdb -D "$PGDATA" --username="$POSTGRES_USER" --pwfile=<(echo "$POSTGRES_PASSWORD") --auth-host=md5 --auth-local=trust
     
     # Configure PostgreSQL to listen on all interfaces
